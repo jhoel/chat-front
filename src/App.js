@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import ChatInput from './components/ChatInput.js';
+import ChatMessage from './components/ChatMessage.js';
 
 function App() {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="chat-container">
+      <div className="chat-messages">
+        {messages.map((message, index) => (
+          <ChatMessage key={index} message={message} />
+        ))}
+      </div>
+
+      <ChatInput
+        value={newMessage}
+        onChange={e => setNewMessage(e.target.value)}
+        onSend={() => {
+          setMessages([...messages, { text: newMessage, username: 'jhoel' }]);
+          setNewMessage('');
+        }}
+      />
+
     </div>
   );
 }
