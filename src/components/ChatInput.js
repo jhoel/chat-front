@@ -7,6 +7,7 @@ function ChatInput({ value, onChange, onSend }) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault(); // Evitar un salto de línea
       onSend(); // Llamar a la función de enviar mensaje
+
     }
   };
 
